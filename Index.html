@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>بازی کلیک سریع</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background: #f3f3f3;
+    }
+    #score {
+      font-size: 24px;
+      margin: 20px;
+    }
+    #time {
+      font-size: 20px;
+      color: darkred;
+    }
+    button {
+      font-size: 20px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 10px;
+      background: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+    button:disabled {
+      background: gray;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 بازی کلیک سریع</h1>
+  <div id="score">امتیاز: 0</div>
+  <div id="time">زمان: 10</div>
+  <button id="clickBtn">کلیک کن!</button>
+
+  <script>
+    let score = 0;
+    let time = 10;
+    let interval;
+
+    const scoreEl = document.getElementById("score");
+    const timeEl = document.getElementById("time");
+    const btn = document.getElementById("clickBtn");
+
+    btn.onclick = () => {
+      if (time > 0) {
+        score++;
+        scoreEl.textContent = "امتیاز: " + score;
+      }
+    };
+
+    function startGame() {
+      interval = setInterval(() => {
+        time--;
+        timeEl.textContent = "زمان: " + time;
+        if (time <= 0) {
+          clearInterval(interval);
+          btn.disabled = true;
+          alert("بازی تمام شد! امتیاز نهایی: " + score);
+        }
+      }, 1000);
+    }
+
+    startGame();
+  </script>
+</body>
+</html>
